@@ -1,4 +1,3 @@
-
 import Header from "@/components/Header";
 import ClergyGrid from "@/components/ClergyGrid";
 import HowItWorks from "@/components/HowItWorks";
@@ -28,7 +27,11 @@ const Index = () => {
     setLanguage(l);
   }
   function handleBack() {
-    setStep(prev=>prev-1);
+    setStep((prev) => {
+      if (prev === 2) return 1;
+      if (prev === 1) return 0;
+      return 0;
+    });
   }
   // Reset booking flow
   function handleStartFlow() {
