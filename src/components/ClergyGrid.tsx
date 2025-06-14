@@ -12,7 +12,8 @@ const clergyList = [
     location: "Delhi, India",
     rating: 4.8,
     avatar: "https://randomuser.me/api/portraits/men/32.jpg",
-    languages: ["Hindi", "Sanskrit", "English"]
+    languages: ["Hindi", "Sanskrit", "English"],
+    price: 3500,
   },
   {
     id: 2,
@@ -22,7 +23,8 @@ const clergyList = [
     location: "New York, USA",
     rating: 4.9,
     avatar: "https://randomuser.me/api/portraits/men/61.jpg",
-    languages: ["Arabic", "English"]
+    languages: ["Arabic", "English"],
+    price: 250,
   },
   {
     id: 3,
@@ -32,7 +34,8 @@ const clergyList = [
     location: "London, UK",
     rating: 4.7,
     avatar: "https://randomuser.me/api/portraits/women/48.jpg",
-    languages: ["English", "Mandarin"]
+    languages: ["English", "Mandarin"],
+    price: 300,
   },
   {
     id: 4,
@@ -42,7 +45,8 @@ const clergyList = [
     location: "Kathmandu, Nepal",
     rating: 4.6,
     avatar: "https://randomuser.me/api/portraits/men/88.jpg",
-    languages: ["Tibetan", "Nepali", "English"]
+    languages: ["Tibetan", "Nepali", "English"],
+    price: 200,
   },
   {
     id: 5,
@@ -52,7 +56,8 @@ const clergyList = [
     location: "Boston, USA",
     rating: 4.95,
     avatar: "https://randomuser.me/api/portraits/men/10.jpg",
-    languages: ["English", "Spanish"]
+    languages: ["English", "Spanish"],
+    price: 275,
   },
   {
     id: 6,
@@ -62,8 +67,9 @@ const clergyList = [
     location: "Mumbai, India",
     rating: 4.85,
     avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-    languages: ["Hindi", "Marathi"]
-  }
+    languages: ["Hindi", "Marathi"],
+    price: 4800,
+  },
   // Add more later!
 ];
 

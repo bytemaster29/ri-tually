@@ -3,6 +3,7 @@ import * as React from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 
 const BookingModal = ({ open, onOpenChange, clergy }) => {
   const [name, setName] = React.useState("");
@@ -20,7 +21,7 @@ const BookingModal = ({ open, onOpenChange, clergy }) => {
       setName("");
       setDetails("");
       onOpenChange(false);
-    }, 1500);
+    }, 1850);
   }
 
   return (
@@ -62,9 +63,16 @@ const BookingModal = ({ open, onOpenChange, clergy }) => {
             </DialogFooter>
           </form>
         ) : (
-          <div className="flex flex-col gap-4 items-center py-5">
-            <div className="text-lg font-semibold text-green-700">Booking Sent!</div>
-            <div className="text-muted-foreground">We'll notify you after connecting with {clergy.name}.</div>
+          <div className="flex flex-col gap-4 items-center py-5 animate-fade-in">
+            <div className="bg-green-100 rounded-full p-2">
+              <Check className="text-green-700 w-8 h-8" />
+            </div>
+            <div className="text-xl font-bold text-green-700 font-playfair">Booking Sent!</div>
+            <div className="text-muted-foreground text-center">
+              We'll notify you after connecting with <span className="font-medium">{clergy.name}</span>.
+              <br />
+              You can also reach out directly using the contact options on their profile.
+            </div>
           </div>
         )}
       </DialogContent>

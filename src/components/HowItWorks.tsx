@@ -4,7 +4,7 @@ const HowItWorks = () => (
     id="howitworks"
     className="rounded-xl bg-card/80 border border-muted p-8 shadow-sm max-w-4xl mx-auto"
   >
-    <h2 className="text-2xl font-bold mb-3 text-primary">How It Works</h2>
+    <h2 className="font-playfair text-2xl font-bold mb-5 text-primary">How It Works</h2>
     <ol className="list-decimal pl-6 text-lg text-muted-foreground space-y-2">
       <li>
         <span className="font-semibold text-primary">Browse &amp; Filter:</span>{" "}
