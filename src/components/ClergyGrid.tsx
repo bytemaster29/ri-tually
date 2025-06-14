@@ -1,4 +1,3 @@
-
 import ClergyCard from "./ClergyCard";
 import { useState } from "react";
 
@@ -73,35 +72,33 @@ const clergyList = [
   // Add more later!
 ];
 
-// Filter by name/religion/ritual (case-insensitive, includes)
-function filterClergy({ search, religion, ritual }) {
+function filterClergy({ religion, ritual, language }) {
   return clergyList.filter(cg => {
-    const matchesSearch =
-      !search ||
-      cg.name.toLowerCase().includes(search.toLowerCase()) ||
-      cg.rituals.some(r =>
-        r.toLowerCase().includes(search.toLowerCase())
-      );
     const matchesReligion = !religion || cg.religion === religion;
     const matchesRitual = !ritual || cg.rituals.includes(ritual);
-    return matchesSearch && matchesReligion && matchesRitual;
+    // Filtering by language (optional)
+    const matchesLanguage = !language || cg.languages.includes(language);
+    return matchesReligion && matchesRitual && matchesLanguage;
   });
 }
 
 const ClergyGrid = ({
-  search,
   religion,
   ritual,
+  language,
 }: {
-  search: string;
   religion: string;
   ritual: string;
+  language: string;
 }) => {
-  const list = filterClergy({ search, religion, ritual });
+  const list = filterClergy({ religion, ritual, language });
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-primary">Featured Guides</h2>
+      <h2 className="text-2xl font-bold mb-6 text-primary">Available Guides</h2>
+      <div className="mb-3 text-muted-foreground text-sm font-medium">
+        <span>Starts from <span className="font-bold text-green-700">₹999</span></span>
+      </div>
       {list.length === 0 ? (
         <div className="p-6 text-center text-muted-foreground rounded-lg border bg-muted/40">
           No matches. Try adjusting your filters.

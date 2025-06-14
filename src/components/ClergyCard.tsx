@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import BookingModal from "./BookingModal";
 import { Mail, MessageCircle } from "lucide-react"; // Two icons from your allowed set
@@ -19,11 +18,12 @@ const ClergyCard = ({ clergy }) => {
       <div className="absolute right-4 top-4 flex flex-col items-end gap-2">
         <span
           className={
-            `px-2 py-0.5 text-xs rounded-full border font-semibold ` +
+            `px-2 py-0.5 text-xs rounded-full border font-semibold flex items-center gap-1 ` +
             (ReligionColors[clergy.religion] || ReligionColors.Other)
           }
         >
           {clergy.religion}
+          <span className="ml-1 inline-block bg-green-700 text-white rounded px-1.5 py-0.5 text-[10px] font-bold align-middle">✓ Verified</span>
         </span>
         {/* Show price */}
         {clergy.price && (

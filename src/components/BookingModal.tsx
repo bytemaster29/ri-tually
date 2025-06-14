@@ -1,6 +1,13 @@
 
 import * as React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
@@ -8,6 +15,10 @@ import { Check } from "lucide-react";
 const BookingModal = ({ open, onOpenChange, clergy }) => {
   const [name, setName] = React.useState("");
   const [details, setDetails] = React.useState("");
+  const [ritual, setRitual] = React.useState("");
+  const [date, setDate] = React.useState("");
+  const [city, setCity] = React.useState("");
+  const [contact, setContact] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
 
   if (!clergy) return null;
@@ -15,24 +26,25 @@ const BookingModal = ({ open, onOpenChange, clergy }) => {
   function handleSubmit(e) {
     e.preventDefault();
     setSubmitted(true);
-    // For now just closes after brief "submitted" state
     setTimeout(() => {
       setSubmitted(false);
       setName("");
       setDetails("");
+      setRitual("");
+      setDate("");
+      setCity("");
+      setContact("");
       onOpenChange(false);
-    }, 1850);
+    }, 1750);
   }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            Book {clergy.name}
-          </DialogTitle>
+          <DialogTitle>Book {clergy.name}</DialogTitle>
           <DialogDescription>
-            Fill out your details and we’ll connect you with this guide.
+            Fill in details—we’ll connect you and confirm.
           </DialogDescription>
         </DialogHeader>
         {!submitted ? (
@@ -48,17 +60,52 @@ const BookingModal = ({ open, onOpenChange, clergy }) => {
               />
             </label>
             <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">Ritual</span>
+              <Input
+                value={ritual}
+                onChange={e => setRitual(e.target.value)}
+                placeholder="e.g. Wedding, Puja, Baptism"
+                required
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">Preferred Date / Time</span>
+              <Input
+                value={date}
+                onChange={e => setDate(e.target.value)}
+                placeholder="e.g. July 20, 7:30AM"
+                required
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">City</span>
+              <Input
+                value={city}
+                onChange={e => setCity(e.target.value)}
+                placeholder="City"
+                required
+              />
+            </label>
+            <label className="flex flex-col gap-1">
+              <span className="text-sm font-medium">Phone or Email</span>
+              <Input
+                value={contact}
+                onChange={e => setContact(e.target.value)}
+                placeholder="Your phone or email"
+                required
+              />
+            </label>
+            <label className="flex flex-col gap-1">
               <span className="text-sm font-medium">Ritual Details</span>
               <Input
                 value={details}
                 onChange={e => setDetails(e.target.value)}
-                placeholder="e.g. Wedding on July 20 in Mumbai"
-                required
+                placeholder="Notes (family size, custom needs, etc)"
               />
             </label>
             <DialogFooter>
               <Button type="submit" className="bg-green-700 hover:bg-green-800">
-                Request Booking
+                Confirm Booking
               </Button>
             </DialogFooter>
           </form>
@@ -69,8 +116,7 @@ const BookingModal = ({ open, onOpenChange, clergy }) => {
             </div>
             <div className="text-xl font-bold text-green-700 font-playfair">Booking Sent!</div>
             <div className="text-muted-foreground text-center">
-              We'll notify you after connecting with <span className="font-medium">{clergy.name}</span>.
-              <br />
+              We'll notify you after connecting with <span className="font-medium">{clergy.name}</span>.<br />
               You can also reach out directly using the contact options on their profile.
             </div>
           </div>
