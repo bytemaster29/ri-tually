@@ -41,19 +41,19 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <Header language={language} onLanguageChange={handleChangeLanguage} />
-      <section className="relative flex flex-col items-center bg-gradient-to-r from-indigo-100 via-white to-green-100 px-0 py-0 md:px-8 md:py-10 border-b min-h-[340px]">
+      <section className="relative flex flex-col items-center bg-gradient-to-r from-yellow-100 via-amber-50 to-orange-100 px-0 py-0 md:px-8 md:py-10 border-b min-h-[340px]">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1500&q=80"
             alt=""
-            className="object-cover w-full h-full opacity-70"
-            style={{ filter: "blur(1.5px) brightness(0.8)" }}
+            className="object-cover w-full h-full opacity-60"
+            style={{ filter: "blur(1.5px) brightness(0.9)" }}
             draggable={false}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-green-50/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-yellow-50/95 via-transparent to-amber-50/85" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-4 px-8 py-12 md:py-20 items-center">
           <h1 className="font-playfair text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-2 flex items-center gap-4 drop-shadow-md text-center">
@@ -97,7 +97,7 @@ const Index = () => {
         </div>
       </section>
       {/* Stepper Flow */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-12">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-12 bg-gradient-to-b from-yellow-25 to-amber-25">
         <div className="max-w-3xl mx-auto mb-10">
           {step === 0 && (
             <FaithStep value={religion} onChange={handleFaithSelect} />
