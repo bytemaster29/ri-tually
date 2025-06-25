@@ -1,6 +1,5 @@
-
 import ClergyCard from "./ClergyCard";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 // Demo data for version 1
 const clergyList = [
@@ -204,13 +203,38 @@ const clergyList = [
   }
 ];
 
-function filterClergy({ religion, ritual, language }) {
+function filterClergy({ religion, ritual, language, searchQuery, locationFilter, filters }) {
   return clergyList.filter(cg => {
     const matchesReligion = !religion || cg.religion === religion;
     const matchesRitual = !ritual || cg.rituals.includes(ritual);
-    // Filtering by language (optional)
     const matchesLanguage = !language || cg.languages.includes(language);
-    return matchesReligion && matchesRitual && matchesLanguage;
+    
+    // Search query matching
+    const matchesSearch = !searchQuery || 
+      cg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cg.religion.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      cg.rituals.some(r => r.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    // Location filtering
+    const matchesLocation = !locationFilter || 
+      cg.location.toLowerCase().includes(locationFilter.toLowerCase());
+    
+    // Price range filtering
+    const matchesPriceRange = !filters.priceRange || (() => {
+      const price = cg.price;
+      const [min, max] = filters.priceRange.split('-').map(p => p.replace('+', ''));
+      if (max) {
+        return price >= parseInt(min) && price <= parseInt(max);
+      } else {
+        return price >= parseInt(min);
+      }
+    })();
+    
+    // Rating filtering
+    const matchesRating = !filters.rating || cg.rating >= parseFloat(filters.rating);
+    
+    return matchesReligion && matchesRitual && matchesLanguage && 
+           matchesSearch && matchesLocation && matchesPriceRange && matchesRating;
   });
 }
 
@@ -218,26 +242,79 @@ const ClergyGrid = ({
   religion,
   ritual,
   language,
+  searchQuery = "",
+  locationFilter = "",
+  filters = {}
 }: {
   religion: string;
   ritual: string;
   language: string;
+  searchQuery?: string;
+  locationFilter?: string;
+  filters?: any;
 }) => {
-  const list = filterClergy({ religion, ritual, language });
+  const [sortBy, setSortBy] = useState("rating");
+  
+  const filteredList = useMemo(() => {
+    const filtered = filterClergy({ 
+      religion, 
+      ritual, 
+      language, 
+      searchQuery, 
+      locationFilter, 
+      filters 
+    });
+    
+    // Sort results
+    return filtered.sort((a, b) => {
+      switch (sortBy) {
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "rating":
+          return b.rating - a.rating;
+        case "name":
+          return a.name.localeCompare(b.name);
+        default:
+          return b.rating - a.rating;
+      }
+    });
+  }, [religion, ritual, language, searchQuery, locationFilter, filters, sortBy]);
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6 text-primary">Available Guides</h2>
-      <div className="mb-3 text-muted-foreground text-sm font-medium">
-        <span>Starts from <span className="font-bold text-green-700">₹999</span></span>
+      <div className="flex justify-between items-center mb-6">
+        <div>
+          <h2 className="text-2xl font-bold text-charcoal">Available Guides</h2>
+          <div className="text-muted text-sm font-medium">
+            <span>{filteredList.length} guides found</span>
+            <span className="ml-4">Starts from <span className="font-bold text-green-700">₹999</span></span>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-muted">Sort by:</label>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+            <option value="rating">Highest Rated</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="name">Name A-Z</option>
+          </select>
+        </div>
       </div>
-      {list.length === 0 ? (
-        <div className="p-6 text-center text-muted-foreground rounded-lg border bg-muted/40">
-          No matches. Try adjusting your filters.
+      
+      {filteredList.length === 0 ? (
+        <div className="p-6 text-center text-muted rounded-lg border bg-white/50">
+          <p className="text-lg mb-2">No matches found</p>
+          <p className="text-sm">Try adjusting your search criteria or filters</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
-          {list.map(cg => (
+          {filteredList.map(cg => (
             <ClergyCard key={cg.id} clergy={cg} />
           ))}
         </div>
