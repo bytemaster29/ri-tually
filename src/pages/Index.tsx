@@ -41,9 +41,9 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-golden-50 via-background to-golden-100">
       <Header language={language} onLanguageChange={handleChangeLanguage} />
-      <section className="relative flex flex-col items-center bg-gradient-to-r from-yellow-100 via-amber-50 to-orange-100 px-0 py-0 md:px-8 md:py-10 border-b min-h-[340px]">
+      <section className="relative flex flex-col items-center bg-gradient-to-r from-golden-100 via-background to-golden-200 px-0 py-0 md:px-8 md:py-10 border-b min-h-[340px]">
         <div className="absolute inset-0 z-0">
           <img
             src="https://images.unsplash.com/photo-1473177104440-ffee2f376098?auto=format&fit=crop&w=1500&q=80"
@@ -53,10 +53,10 @@ const Index = () => {
             draggable={false}
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-yellow-50/95 via-transparent to-amber-50/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-transparent to-golden-100/85" />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-4 px-8 py-12 md:py-20 items-center">
-          <h1 className="font-playfair text-4xl md:text-5xl font-extrabold tracking-tight text-primary mb-2 flex items-center gap-4 drop-shadow-md text-center">
+          <h1 className="font-playfair text-4xl md:text-5xl font-extrabold tracking-tight text-foreground mb-2 flex items-center gap-4 drop-shadow-md text-center">
             <span>Find &amp; Book Trusted Ritual Guides</span>
           </h1>
           <p className="text-lg md:text-2xl text-muted-foreground max-w-3xl text-center">
@@ -64,25 +64,25 @@ const Index = () => {
           </p>
           <div className="flex gap-4 mt-6 flex-wrap justify-center">
             <button
-              className="bg-green-700 hover:bg-green-800 text-white font-bold px-6 py-3 rounded-lg shadow-md transition hover:scale-105"
+              className="bg-primary hover:bg-accent text-primary-foreground font-bold px-6 py-3 rounded-lg shadow-md transition hover:scale-105"
               onClick={handleStartFlow}
             >
               Start Booking
             </button>
             <button
-              className="bg-primary text-primary-foreground font-semibold rounded px-5 py-3 border border-primary/10 shadow-sm hover:bg-primary/90 transition"
+              className="bg-secondary text-secondary-foreground font-semibold rounded px-5 py-3 border border-border shadow-sm hover:bg-accent hover:text-accent-foreground transition"
               onClick={() => setStep(2)}
             >
               Explore Rituals
             </button>
             <button
-              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-6 py-3 rounded-lg shadow-md transition"
+              className="bg-accent hover:bg-golden-700 text-accent-foreground font-semibold px-6 py-3 rounded-lg shadow-md transition"
               onClick={() => window.scrollTo({ top: 1200, behavior: "smooth" })}
             >
               Find a Trusted Guide
             </button>
             <button
-              className="bg-muted text-primary font-bold border px-6 py-3 rounded-lg"
+              className="bg-muted text-foreground font-bold border px-6 py-3 rounded-lg hover:bg-secondary transition"
               onClick={() => alert("We'll notify you soon!")}
             >
               Join Our Waitlist
@@ -90,14 +90,14 @@ const Index = () => {
           </div>
           <div className="mt-7 flex items-center justify-center gap-2">
             <span className="text-muted-foreground text-sm">Available in:</span>
-            <span className="flex gap-1 text-base font-medium">
+            <span className="flex gap-1 text-base font-medium text-foreground">
               English, Hindi, Tamil, Urdu
             </span>
           </div>
         </div>
       </section>
       {/* Stepper Flow */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-12 bg-gradient-to-b from-yellow-25 to-amber-25">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 py-12 bg-gradient-to-b from-golden-50 to-background">
         <div className="max-w-3xl mx-auto mb-10">
           {step === 0 && (
             <FaithStep value={religion} onChange={handleFaithSelect} />

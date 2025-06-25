@@ -62,6 +62,19 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom colors based on your specifications
+				golden: {
+					50: '#FFFCF2',
+					100: '#FFF8E1',
+					200: '#FFECB3',
+					300: '#FFE082',
+					400: '#FFD54F',
+					500: '#F4C430', // Primary Golden Yellow
+					600: '#FFB300', // Amber accent
+					700: '#FF8F00',
+					800: '#FF6F00',
+					900: '#E65100'
 				}
 			},
 			borderRadius: {
@@ -98,4 +111,3 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
-
